@@ -1,3 +1,5 @@
+import random
+
 import openpyxl
 from deep_translator import GoogleTranslator
 import time
@@ -25,7 +27,7 @@ def translate_excel(input_file, output_file, columns_to_translate):
                 if isinstance(cell, str) and cell.strip():
                     translated = translate_text(cell, row_index, col_index)
                     translated_row.append(translated)
-                    time.sleep(0.3)
+                    time.sleep(random.uniform(0.2, 0.6))
                 else:
                     translated_row.append(cell)
             else:
