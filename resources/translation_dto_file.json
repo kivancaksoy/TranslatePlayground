@@ -1,0 +1,9 @@
+{
+  "input_file": "deneme.xlsx",
+  "output_file": "translated_output.xlsx",
+  "translate_service": "google",
+  "deepl_api_key": "your_deepL_api_key",
+  "source_lang": "de",
+  "target_lang": "tr",
+  "columns_to_translate": [3, 4, 5, 51]
+}
