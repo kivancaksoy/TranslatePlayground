@@ -21,6 +21,7 @@ def translate_text(text, row_index, col_index, translation_dto_file):
             raise ValueError("Invalid translation service selected.")
     except Exception as e:
         print(f"Translation error at row {row_index}, column {col_index}: '{text}' -> {e}")
+        log_error_to_file(row_index, col_index, text, e)
         return text
 
 
@@ -46,6 +47,8 @@ def translate_excel(translation_dto_file_path):
                 translated_row.append(cell)
         translated_sheet.append(translated_row)
 
+        print(f"Translated row {row_index}")
+
     translated_workbook.save(translation_dto_file.output_file)
     print(f"Translated file saved as: {translation_dto_file.output_file}")
 
@@ -63,3 +66,8 @@ def load_dto_from_json(json_file):
         columns_to_translate=data["columns_to_translate"],
         all_columns=data["all_columns"]
     )
+
+
+def log_error_to_file(row_index, col_index, text, error_message, log_file="translation_errors.txt"):
+    with open(log_file, "a", encoding="utf-8") as f:
+        f.write(f"[Row {row_index}, Col {col_index}] '{text}' -> ERROR: {error_message}\n")
