@@ -15,8 +15,8 @@ def translate_text(text, row_index, col_index, translation_dto_file):
                                     target=translation_dto_file.target_lang).translate(text)
         elif translation_dto_file.translate_service == "deepl":
             return DeeplTranslator(api_key=translation_dto_file.deepl_api_key,
-                                   source=translation_dto_file.source_lang.upper(),
-                                   target=translation_dto_file.target_lang.upper()).translate(text)
+                                   source=translation_dto_file.source_lang,
+                                   target=translation_dto_file.target_lang).translate(text)
         else:
             raise ValueError("Invalid translation service selected.")
     except Exception as e:
