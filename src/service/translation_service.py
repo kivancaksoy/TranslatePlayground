@@ -14,7 +14,7 @@ def translate_text(text, row_index, col_index, translation_dto_file):
             return GoogleTranslator(source=translation_dto_file.source_lang,
                                     target=translation_dto_file.target_lang).translate(text)
         elif translation_dto_file.translate_service == "deepl":
-            return DeeplTranslator(api_key=translation_dto_file.api_key,
+            return DeeplTranslator(api_key=translation_dto_file.deepl_api_key,
                                    source=translation_dto_file.source_lang.upper(),
                                    target=translation_dto_file.target_lang.upper()).translate(text)
         else:
@@ -35,7 +35,7 @@ def translate_excel(translation_dto_file_path):
     for row_index, row in enumerate(sheet.iter_rows(values_only=True), start=1):
         translated_row = []
         for col_index, cell in enumerate(row, start=1):
-            if col_index in translation_dto_file.columns_to_translate:
+            if translation_dto_file.all_columns or (col_index in translation_dto_file.columns_to_translate):
                 if isinstance(cell, str) and cell.strip():
                     translated = translate_text(cell, row_index, col_index, translation_dto_file)
                     translated_row.append(translated)
@@ -60,5 +60,6 @@ def load_dto_from_json(json_file):
         deepl_api_key=data["deepl_api_key"],
         source_lang=data["source_lang"],
         target_lang=data["target_lang"],
-        columns_to_translate=data["columns_to_translate"]
+        columns_to_translate=data["columns_to_translate"],
+        all_columns=data["all_columns"]
     )

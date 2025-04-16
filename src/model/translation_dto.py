@@ -7,7 +7,8 @@ class TranslationDto:
             deepl_api_key,
             source_lang,
             target_lang,
-            columns_to_translate
+            columns_to_translate,
+            all_columns
     ):
         self.input_file = input_file
         self.output_file = output_file
@@ -16,3 +17,4 @@ class TranslationDto:
         self.source_lang = source_lang
         self.target_lang = target_lang
         self.columns_to_translate = columns_to_translate
+        self.all_columns = all_columns
