@@ -6,5 +6,5 @@
   "source_lang": "de",
   "target_lang": "tr",
   "columns_to_translate": [3, 4, 5, 51],
-  "all_columns": "false"
+  "all_columns": false
 }
